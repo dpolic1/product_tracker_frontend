@@ -1,0 +1,62 @@
+.main_header {
+    background-color: rgb(25, 182, 221);
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #e6e6e6;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 15px 10px;
+}
+
+.header_active {
+    background-color: #3ab51b;
+}
+
+.header_nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_nav ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav_list_item {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.login_tabs {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav_link {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.language_logout {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.language_button, .logout_button {
+    background-color: inherit;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+}

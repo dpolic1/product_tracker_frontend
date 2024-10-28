@@ -6,14 +6,10 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 15px 10px;
+    padding: 15px 20px; /* Increased left and right padding for uniformity */
 }
 
-.header_active {
-    background-color: #3ab51b;
-}
-
-.header_nav{
+.header_nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,17 +19,13 @@
     display: flex;
     list-style: none;
     gap: 10px;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
 }
 
 .nav_list_item {
-    border: 1px solid black;
-    padding: 5px;
-}
-
-.login_tabs {
-    display: flex;
-    list-style: none;
-    gap: 10px;
+    border: 1px solid black; /* Optional, remove if not needed */
+    padding: 5px; /* Padding for list items */
 }
 
 .nav_link {
@@ -44,19 +36,14 @@
     display: inline-block;
 }
 
-.language_logout {
-    display: flex;
-    list-style: none;
-    gap: 10px;
-}
-
-.language_button, .logout_button {
+.logout_button {
     background-color: inherit;
-    border: 1px solid #000;
+    border: 1px solid black;
     color: #000;
     font-size: 16px;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 10px 10px; /* Padding to match nav_link */
     text-decoration: none;
     cursor: pointer;
+    margin-left: auto; /* Pushes the logout button to the right */
 }

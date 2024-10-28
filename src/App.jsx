@@ -1,31 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import RootLayout from './components/common/root-layout/RootLayout';
 import Home from './components/pages/home/Home';
 import Admin from './components/pages/admin/Admin';
-import Login from './components/pages/login/Login';
-import Register from './components/pages/register/Register';
-import { AuthProvider } from './components/common/auth-context/AuthContext';
+import { keycloak, initKeycloak } from './components/common/keycloak/KeycloakConfiguration';
+import ProtectedRoute from './components/common/ProtectedRoute';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="admin" element={<Admin />} />
+      <Route path="home" element={
+        <ProtectedRoute element={<Home />} isAuthenticated={keycloak.authenticated} hasRole={true} />
+      } />
+      <Route path="admin" element={
+        <ProtectedRoute element={<Admin />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
+      } />
     </Route>
   )
 );
 
 function App() {
-  return (
-    <div>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </div>
-  );
+  const [keycloakInitialized, setKeycloakInitialized] = useState(false);
+
+  useEffect(() => {
+    const initializeKeycloak = async () => {
+      await initKeycloak();
+      setKeycloakInitialized(true);
+    };
+
+    initializeKeycloak();
+  }, []);
+
+  if (!keycloakInitialized) { 
+    return <div>Loading...</div>; 
+  }
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

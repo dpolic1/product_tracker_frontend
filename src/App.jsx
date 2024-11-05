@@ -17,11 +17,11 @@ const router = createBrowserRouter(
       <Route path="notifications" element={
         <ProtectedRoute element={<Notifications />} isAuthenticated={keycloak.authenticated} />
       } />
-      <Route path="admin" element={
-        <ProtectedRoute element={<Admin />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
-      } />
       <Route path="products" element={
         <ProtectedRoute element={<Products />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
+      } />
+      <Route path="admin" element={
+        <ProtectedRoute element={<Admin />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
       } />
     </Route>
   )

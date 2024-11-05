@@ -1,5 +1,5 @@
 import Keycloak from 'keycloak-js';
-import config from '../../../config'; // Adjust the path as necessary
+import config from '../../../config';
 
 const keycloak = new Keycloak({
 	url: config.KEYCLOAK_URL,
@@ -15,7 +15,6 @@ const initKeycloak = () =>
 				keycloak.login();
 			}
 			else {
-				// Log the Access Token and Refresh Token after successful authentication
 				console.log("Access Token:", keycloak.token);
 				console.log("Refresh Token:", keycloak.refreshToken);
 			}

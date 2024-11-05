@@ -19,18 +19,32 @@ export default function Header() {
   return (
     <header className="main_header">
       <nav className="header_nav">
-        <ul className="nav_list">
+      <ul className="nav_list">
+        <>
           <li className="nav_list_item">
             <Link to="/home" className="nav_link">
               Home
             </Link>
           </li>
+          <li className="nav_list_item">
+            <Link to="/notifications" className="nav_link">
+              Notifications
+            </Link>
+          </li>
+        </>
           {isAdmin && (
-            <li className="nav_list_item">
-              <Link to="/admin" className="nav_link">
-                Admin
-              </Link>
-            </li>
+            <>
+              <li className="nav_list_item">
+                <Link to="/admin" className="nav_link">
+                  Admin
+                </Link>
+              </li>
+              <li className="nav_list_item">
+                <Link to="/products" className="nav_link">
+                  Products
+                </Link>
+              </li>
+            </>
           )}
         </ul>
         <button className="logout_button" onClick={handleLogout}>

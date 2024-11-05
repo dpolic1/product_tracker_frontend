@@ -1,18 +1,32 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { keycloak } from "../../common/keycloak/KeycloakConfiguration";
 
 export default function Admin() {
-  const { isAuthenticated, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAdmin) {
+    const isAuthenticated = keycloak.authenticated;
+    const isAdmin = keycloak.realmAccess?.roles?.includes("ADMIN_PRIVILEGES");
+
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+    else if (!isAdmin) {
       navigate("/home");
     }
-  }, [isAuthenticated, isAdmin, navigate]);
+  }, [navigate]);
 
   return (
+    console.log("ok"),
     <div>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
+      <h1>THIS IS ADMIN PAGE</h1>
       <h1>THIS IS ADMIN PAGE</h1>
     </div>
   );

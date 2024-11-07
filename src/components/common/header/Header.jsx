@@ -35,13 +35,13 @@ export default function Header() {
           {isAdmin && (
             <>
               <li className="nav_list_item">
-                <Link to="/admin" className="nav_link">
-                  Admin
+                <Link to="/products" className="nav_link">
+                  Products
                 </Link>
               </li>
               <li className="nav_list_item">
-                <Link to="/products" className="nav_link">
-                  Products
+                <Link to="/admin" className="nav_link">
+                  Admin
                 </Link>
               </li>
             </>

@@ -6,7 +6,7 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 15px 20px; /* Increased left and right padding for uniformity */
+    padding: 15px 20px;
 }
 
 .header_nav {
@@ -19,13 +19,13 @@
     display: flex;
     list-style: none;
     gap: 10px;
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    margin: 0;
+    padding: 0;
 }
 
 .nav_list_item {
-    border: 1px solid black; /* Optional, remove if not needed */
-    padding: 5px; /* Padding for list items */
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .nav_link {
@@ -42,8 +42,8 @@
     color: #000;
     font-size: 16px;
     font-weight: 600;
-    padding: 10px 10px; /* Padding to match nav_link */
+    padding: 10px 10px;
     text-decoration: none;
     cursor: pointer;
-    margin-left: auto; /* Pushes the logout button to the right */
+    margin-left: auto;
 }

@@ -6,7 +6,7 @@ export default function RootLayout() {
   return (
     <div className="flex max-w-[1800px] mx-auto">
       <Sidebar />
-      <main className="grow-1 overflow-y-auto pl-56">
+      <main className="grow overflow-y-auto pl-56 flex justify-center mt-20 min-h-screen">
         <Outlet />
       </main>
     </div>

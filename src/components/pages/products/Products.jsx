@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { keycloak } from "../../common/keycloak/KeycloakConfiguration";
 import ProductsTable from "./components/ProductsTable";
@@ -6,22 +6,66 @@ import ProductsSearchBar from "./components/ProductsSearchBar";
 import ProductsPaginationBar from "./components/ProductsPaginationBar";
 
 export default function Products() {
-	const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
-	useEffect(() => {
-		const isAuthenticated = keycloak.authenticated;
-		const isAdmin = keycloak.realmAccess?.roles?.includes("ADMIN_PRIVILEGES");
+  // Debounce effect
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500); // Wait 0.5s after user stops typing
 
-		if (!isAuthenticated || !isAdmin) {
-			navigate("/home");
-		}
-	}, [navigate]);
+    return () => {
+      clearTimeout(handler); // Clean up the previous timeout
+    };
+  }, [searchTerm]); // Only runs when searchTerm changes
 
-	return (
-		<div>
-      <ProductsSearchBar />
-			<ProductsTable />
-      <ProductsPaginationBar />
-		</div>
-	);
+  // Fetch products when debounced search term changes
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true); // Set loading state to true before request
+
+      try {
+        let url;
+        if (debouncedSearchTerm) {
+          url = `http://localhost:8101/products/search/name?keyword=${debouncedSearchTerm}`;
+          console.log("Custom request with keyword:", url);
+        } else {
+          url = "http://localhost:8101/products/search/name";
+          console.log("Initial request (no keyword):", url);
+        }
+
+        const response = await fetch(url);
+        const data = await response.json();
+        setProducts(data.content);
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false); // Set loading to false even if there's an error
+      }
+    };
+
+    fetchProducts(); // Call fetch when debouncedSearchTerm changes
+  }, [debouncedSearchTerm]); // Trigger the effect when debouncedSearchTerm changes
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} // Set searchTerm as user types
+            placeholder="Search for products..."
+            className="w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"
+          />
+      </div>
+      {loading ? (
+        <p>Loading products...</p>
+      ) : (
+        <ProductsTable products={products} />
+      )}
+    </div>
+  );
 }

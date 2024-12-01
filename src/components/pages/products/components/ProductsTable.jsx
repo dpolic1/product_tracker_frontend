@@ -34,7 +34,7 @@ export default function ProductsTable({ products }) {
               <th scope="col" className="px-6 py-3">Product Name</th>
               <th scope="col" className="px-6 py-3">GPC Brick Code</th>
               <th scope="col" className="px-6 py-3">GPC Brick Text</th>
-              <th scope="col" className="px-6 py-3">Manually Assigned GPC Flag</th>
+              <th scope="col" className="px-6 py-3">Manually Assigned GPC</th>
               <th scope="col" className="px-6 py-3">Action</th>
             </tr>
           </thead>

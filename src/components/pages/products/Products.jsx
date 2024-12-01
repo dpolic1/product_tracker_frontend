@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { keycloak } from "../../common/keycloak/KeycloakConfiguration";
 import ProductsTable from "./components/ProductsTable";
-import ProductsSearchBar from "./components/ProductsSearchBar";
 import ProductsPaginationBar from "./components/ProductsPaginationBar";
 
 export default function Products() {

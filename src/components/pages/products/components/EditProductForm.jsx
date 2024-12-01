@@ -9,10 +9,12 @@ export default function EditProductForm({
 }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[600px]">
+      <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[1200px]">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Edit Product</h3>
         <form onSubmit={handleFormSubmit}>
-          <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-[65%_33%] gap-4">
+            {/* Left Side of the Form */}
+            <div className="grid grid-cols-2 gap-4">
             {/* GTIN */}
             <div className="mb-4">
               <label htmlFor="gtin" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -182,6 +184,45 @@ export default function EditProductForm({
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
+            </div>
+          </div>
+            
+
+            {/* Right Side: Predicted Categories */}
+            <div className="col-span-1">
+              {editedProduct.predictedCategories && (
+                <div className="mb-4">
+                  <label
+                    htmlFor="predictedCategories"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Predicted Categories
+                  </label>
+                  <div className="mt-2 space-y-2 flex flex-wrap gap-4">
+                    {editedProduct.predictedCategories.map((category, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        className={`flex items-center justify-center w-full px-4 py-2 rounded-md border text-sm text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none ${editedProduct.selectedPrediction === category.gpcBrickCode
+                          ? 'bg-blue-600 text-white'
+                          : 'border-gray-300 dark:border-gray-600'
+                          }`}
+                        onClick={() => {
+                          setEditedProduct((prev) => ({
+                            ...prev,
+                            selectedPrediction: category.gpcBrickCode, // Set selected prediction
+                          }));
+                        }}
+                      >
+                        <div className="flex flex-col items-center">
+                          <span>{category.gpcSegmentCode}{" - "}{category.gpcSegmentText}</span>
+                          <span>(Confidence: {category.predictionConfidence}%)</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

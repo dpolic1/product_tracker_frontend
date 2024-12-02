@@ -1,33 +1,38 @@
 import React from "react";
 
-export default function ProductsPaginationBar({ page, totalPages, onPageChange }) {
-
-
+export default function ProductsPaginationBar({ currentPage, totalPages, handlePageChange }) {
   return (
-    <nav aria-label="Page navigation example">
-      <ul className="inline-flex -space-x-px text-sm">
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-        </li>
-        <li>
-          <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-        </li>
-      </ul>
-    </nav>
-  )
+    <div className="mx-auto flex items-center justify-between mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md w-[50%]">
+      {/* Previous Button */}
+      {currentPage > 0 ? (
+        <button
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          Previous
+        </button>
+      ) : (
+        <div className="w-24"></div> // Placeholder for alignment
+      )}
+
+      {/* Current Page Info */}
+      <div className="flex-grow text-center">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          Page {currentPage + 1} of {totalPages}
+        </span>
+      </div>
+
+      {/* Next Button */}
+      {currentPage < totalPages - 1 ? (
+        <button
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        <div className="w-24"></div> // Placeholder for alignment
+      )}
+    </div>
+  );
 }

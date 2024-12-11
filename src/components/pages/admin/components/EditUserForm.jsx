@@ -24,7 +24,7 @@ export default function EditUserForm({
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${keycloak.token}`, // Include bearer token
+              Authorization: `Bearer ${keycloak.token}`,
               "Content-Type": "application/json",
             },
           }
@@ -58,9 +58,6 @@ export default function EditUserForm({
     setUserRoles(updatedUserRoles); // Update the userRoles state
     handleRoleChange(updatedUserRoles); // Update parent state or submit form
   };
-
-  console.log(roles);
-  console.log(userRoles);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

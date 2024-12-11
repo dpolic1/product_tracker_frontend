@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { keycloak } from "../../../common/keycloak/KeycloakConfiguration.jsx";
 
 export default function NotificationsTable({ notifications }) {
 
-return (
+  const deleteNotification = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8100/notifications/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${keycloak.token}`, // Add the Bearer token
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        // Filter out the deleted notification from the list
+        setNotifications(prevNotifications => prevNotifications.filter(notification => notification.id !== id));
+      } else {
+        console.error("Failed to delete notification.");
+      }
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+    }
+  };
+
+  return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -12,6 +34,7 @@ return (
             <th scope="col" className="px-6 py-3">Warning Level</th>
             <th scope="col" className="px-6 py-3">Description</th>
             <th scope="col" className="px-6 py-3">Viewed</th>
+            <th scope="col" className="px-6 py-3">Action</th> {/* New column */}
           </tr>
         </thead>
         <tbody>
@@ -28,11 +51,19 @@ return (
                 <td className="px-6 py-4">{notification.warningLevel}</td>
                 <td className="px-6 py-4">{notification.description}</td>
                 <td className="px-6 py-4">{notification.viewedFlag ? "Yes" : "No"}</td>
+                <td className="px-6 py-4">
+                  <button
+                    onClick={() => deleteNotification(notification.id)}
+                    className="text-red-600 hover:text-red-800 focus:outline-none"
+                  >
+                    Delete
+                  </button>
+                </td> {/* Delete button */}
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5" className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+              <td colSpan="6" className="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                 No notifications found.
               </td>
             </tr>

@@ -36,16 +36,16 @@ export default function Products() {
 
         const response = await fetch(url);
         const data = await response.json();
-        setProducts(data.content); // Set the products list
-        setTotalPages(data.totalPages); // Set the total number of pages
-        setLoading(false); // Set loading to false once data is fetched
+        setProducts(data.content);
+        setTotalPages(data.totalPages);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
-        setLoading(false); // Set loading to false even if there's an error
+        setLoading(false); // Set loading to false if there's an error
       }
     };
 
-    fetchProducts(); // Call fetch when debouncedSearchTerm or currentPage changes
+    fetchProducts();
   }, [debouncedSearchTerm, currentPage]); // Trigger the effect when debouncedSearchTerm or currentPage changes
 
   // Handle page change

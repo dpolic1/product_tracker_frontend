@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { keycloak } from "../../common/keycloak/KeycloakConfiguration"; // Adjust the path as needed
+import { keycloak } from "../../common/keycloak/KeycloakConfiguration";
 import NotificationsTable from "./components/NotificationsTable";
 
 export default function Notifications() {

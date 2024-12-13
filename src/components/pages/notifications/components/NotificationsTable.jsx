@@ -14,8 +14,7 @@ export default function NotificationsTable({ notifications }) {
       });
 
       if (response.ok) {
-        // Filter out the deleted notification from the list
-        setNotifications(prevNotifications => prevNotifications.filter(notification => notification.id !== id));
+        window.location.reload();
       } else {
         console.error("Failed to delete notification.");
       }
@@ -25,7 +24,7 @@ export default function NotificationsTable({ notifications }) {
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-slate-100">
       <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -34,7 +33,7 @@ export default function NotificationsTable({ notifications }) {
             <th scope="col" className="px-6 py-3">Warning Level</th>
             <th scope="col" className="px-6 py-3">Description</th>
             <th scope="col" className="px-6 py-3">Viewed</th>
-            <th scope="col" className="px-6 py-3">Action</th> {/* New column */}
+            <th scope="col" className="px-6 py-3">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -42,9 +41,8 @@ export default function NotificationsTable({ notifications }) {
             notifications.map((notification, index) => (
               <tr
                 key={notification.id || index}
-                className={`odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 ${
-                  !notification.viewedFlag ? "font-bold" : ""
-                }`}
+                className={`odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 ${!notification.viewedFlag ? "font-bold" : ""
+                  }`}
               >
                 <td className="px-6 py-4">{notification.id}</td>
                 <td className="px-6 py-4">{notification.productGtin}</td>
@@ -58,7 +56,7 @@ export default function NotificationsTable({ notifications }) {
                   >
                     Delete
                   </button>
-                </td> {/* Delete button */}
+                </td>
               </tr>
             ))
           ) : (

@@ -69,7 +69,12 @@ export default function Sidebar() {
             <>
               <li className="">
                 <Link to="/products" className="text-center text-white bg-slate-700 w-full block px-3 py-1 rounded-md">
-                  Products
+                  All Products
+                </Link>
+              </li>
+              <li className="">
+                <Link to="/new-product" className="text-center text-white bg-slate-700 w-full block px-3 py-1 rounded-md">
+                  New Product
                 </Link>
               </li>
               <li className="">

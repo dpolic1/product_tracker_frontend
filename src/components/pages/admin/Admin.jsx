@@ -72,7 +72,6 @@ export default function Admin() {
   };
 
   const handleUpdateUser = (updatedUser) => {
-    // Update user via API
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.username === updatedUser.username ? updatedUser : user

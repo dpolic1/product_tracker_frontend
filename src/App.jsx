@@ -5,6 +5,7 @@ import Home from './components/pages/home/Home';
 import Notifications from './components/pages/notifications/Notifications';
 import Admin from './components/pages/admin/Admin';
 import Products from './components/pages/products/Products';
+import NewProduct from './components/pages/new-product/NewProduct';
 import { keycloak, initKeycloak } from './components/common/keycloak/KeycloakConfiguration';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
@@ -19,6 +20,9 @@ const router = createBrowserRouter(
       } />
       <Route path="products" element={
         <ProtectedRoute element={<Products />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
+      } />
+      <Route path="new-product" element={
+        <ProtectedRoute element={<NewProduct />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
       } />
       <Route path="admin" element={
         <ProtectedRoute element={<Admin />} isAuthenticated={keycloak.authenticated} hasRole={keycloak.realmAccess?.roles.includes('ADMIN_PRIVILEGE')} />
@@ -39,8 +43,8 @@ function App() {
     initializeKeycloak();
   }, []);
 
-  if (!keycloakInitialized) { 
-    return <div>Loading...</div>; 
+  if (!keycloakInitialized) {
+    return <div>Loading...</div>;
   }
 
   return <RouterProvider router={router} />;

@@ -84,6 +84,7 @@ export default function NewProductForm({
 
       if (response.ok) {
         const data = await response.json();
+        console.log("GPC Families:", data);
         setGpcFamilies(data); // Update GPC families state
       } else {
         console.error("Error fetching GPC families: ", response.statusText);
@@ -124,6 +125,7 @@ export default function NewProductForm({
 
       if (response.ok) {
         const data = await response.json();
+        console.log("GPC Classes:", data);
         setGpcClasses(data); // Update GPC classes state
       } else {
         console.error("Error fetching GPC classes: ", response.statusText);
@@ -164,6 +166,7 @@ export default function NewProductForm({
 
       if (response.ok) {
         const data = await response.json();
+        console.log("GPC Bricks:", data);
         setGpcBricks(data); // Update GPC bricks state
       } else {
         console.error("Error fetching GPC bricks: ", response.statusText);
@@ -313,37 +316,37 @@ export default function NewProductForm({
             </div>
           </div>
 
-           {/* Right Side: Prediction Buttons and Submit Button */}
-        <div className="flex flex-col h-full justify-between space-y-4">
-          {/* Predict Categories Button */}
-          <button
-            type="button"
-            onClick={handlePredictClick}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mt-6"
-          >
-            {loading ? "Loading..." : "Predict Categories"}
-          </button>
+          {/* Right Side: Prediction Buttons and Submit Button */}
+          <div className="flex flex-col h-full justify-between space-y-4 items-center">
+            {/* Predict Categories Button */}
+            <button
+              type="button"
+              onClick={handlePredictClick}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mt-6 w-4/5"
+            >
+              {loading ? "Loading..." : "Predict Categories"}
+            </button>
 
             {predictionData && (
-            <div className="mt-4 space-y-2">
-              {predictionData.map((prediction, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-                  onClick={() => handlePredictionButtonClick(prediction)}
-                >
-                  {`Prediction ${index + 1}: ${prediction.gpcSegmentText} (Confidence: ${prediction.predictionConfidence.toFixed(2)})`}
-                </button>
-              ))}
-            </div>
-          )}
+              <div className="mt-4 space-y-2">
+                {predictionData.map((prediction, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+                    onClick={() => handlePredictionButtonClick(prediction)}
+                  >
+                    {`Prediction ${index + 1}: ${prediction.gpcSegmentText} (Confidence: ${prediction.predictionConfidence.toFixed(2)})`}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Submit Button at the Bottom */}
             <button
               type="submit"
               disabled={!formComplete}
-              className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mt-6 ${!formComplete ? 'cursor-not-allowed opacity-50' : ''}`}
+              className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mt-6 w-4/5 ${!formComplete ? 'cursor-not-allowed opacity-50' : ''}`}
             >
               Submit
             </button>

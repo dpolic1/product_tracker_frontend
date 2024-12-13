@@ -27,7 +27,6 @@ export default function NewProductForm({
     try {
       setLoading(true); // Start loading
 
-      // Add Keycloak token to the Authorization header
       const response = await fetch("http://localhost:8100/predicted-categories/test", {
         method: "GET",
         headers: {

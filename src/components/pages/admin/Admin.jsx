@@ -30,7 +30,7 @@ export default function Admin() {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${keycloak.token}`, // Include bearer token
+            Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
           },
         }
@@ -54,7 +54,7 @@ export default function Admin() {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${keycloak.token}`, // Include bearer token
+            Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
           },
         }
@@ -65,7 +65,13 @@ export default function Admin() {
       }
   
       const data = await response.json();
-      setRoles(data);
+      const filteredRoles = data.filter(
+        (role) =>
+          role.name !== "offline_access" &&
+          role.name !== "uma_authorization" &&
+          role.name !== "default-roles-dp-diplomski"
+      );
+      setRoles(filteredRoles);
     } catch (error) {
       console.error("Error fetching roles:", error);
     }

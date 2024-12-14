@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProductsPaginationBar({ currentPage, totalPages, handlePageChange }) {
   return (
-    <div className="mx-auto flex items-center justify-between mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md w-[50%]">
+    <div className="mx-auto flex items-center justify-between mt-4 p-2 bg-gray-100 dark:bg-gray-800 rounded-md shadow-md w-[50%]">
       {/* Previous Button */}
       {currentPage > 0 ? (
         <button

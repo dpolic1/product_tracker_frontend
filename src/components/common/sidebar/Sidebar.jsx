@@ -5,7 +5,8 @@ import { keycloak } from "../keycloak/KeycloakConfiguration.jsx";
 
 export default function Sidebar() {
   const isAuthenticated = keycloak.authenticated;
-  const isAdmin = keycloak.realmAccess?.roles?.includes("ADMIN_PRIVILEGES") || false;
+  const hasAdminRole = keycloak.realmAccess?.roles?.includes("ADMIN_PRIVILEGES") || false;
+  const hasProductManagementRole = keycloak.realmAccess?.roles?.includes("PRODUCT_MANAGEMENT") || false;
   const [unviewedNotifications, setUnviewedNotifications] = useState(0);
 
   const handleLogout = () => {
@@ -65,7 +66,7 @@ export default function Sidebar() {
               </Link>
             </li>
           </>
-          {isAdmin && (
+          {hasProductManagementRole && (
             <>
               <li className="">
                 <Link to="/products" className="text-center text-white bg-slate-700 w-full block px-3 py-1 rounded-md">
@@ -77,6 +78,10 @@ export default function Sidebar() {
                   New Product
                 </Link>
               </li>
+            </>
+          )}
+          {hasAdminRole && (
+            <>
               <li className="">
                 <Link to="/admin" className="text-center text-white bg-slate-700 w-full block px-3 py-1 rounded-md">
                   Admin

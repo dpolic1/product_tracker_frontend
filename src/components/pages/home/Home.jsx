@@ -17,8 +17,10 @@ export default function Home() {
 
   return (
     <div className="flex justify-evenly gap-16 w-full max-w-[95%] mx-auto mt-8">
+      <div className="w-2/5">
         <UserBoughtProductsSection />
-      <div>
+      </div>
+      <div className="w-3/5">
         <RecentlyFlaggedProductsTable />
       </div>
     </div>

@@ -17,7 +17,7 @@ export default function Sidebar() {
     if (isAuthenticated) {
       const fetchNotificationsCount = async () => {
         try {
-          const response = await fetch("http://localhost:8100/notifications/count/not-viewed", {
+          const response = await fetch("http://localhost:8200/notifications/count/not-viewed", {
             method: "GET",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,

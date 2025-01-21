@@ -15,7 +15,7 @@ export default function Notifications() {
     } else {
       const fetchNotifications = async () => {
         try {
-          const response = await fetch("http://localhost:8100/notifications", {
+          const response = await fetch("http://localhost:8200/notifications", {
             method: "GET",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,

@@ -5,7 +5,7 @@ export default function NotificationsTable({ notifications }) {
 
   const deleteNotification = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8100/notifications/${id}`, {
+      const response = await fetch(`http://localhost:8200/notifications/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${keycloak.token}`, // Add the Bearer token

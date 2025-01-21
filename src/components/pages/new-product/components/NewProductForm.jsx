@@ -30,7 +30,7 @@ export default function NewProductForm({
     try {
       setLoading(true); // Start loading
 
-      const response = await fetch("http://localhost:8100/predicted-categories/test", {
+      const response = await fetch("http://localhost:8200/predicted-categories/test", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${keycloak.token}`, // Keycloak token for authorization

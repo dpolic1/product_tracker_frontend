@@ -34,7 +34,7 @@ const handleFormSubmit = (e) => {
 
 const handleFlagSubmit = async ({ warningLevel, description }) => {
   try {
-    const response = await fetch("http://localhost:8100/products/flag-product", {
+    const response = await fetch("http://localhost:8200/products/flag-product", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${keycloak.token}`,
